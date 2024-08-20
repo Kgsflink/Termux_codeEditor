@@ -1,0 +1,48 @@
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+" Plugins for Java, C, Python support and autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}  " For autocompletion and language support
+Plug 'dense-analysis/ale'                        " Asynchronous linting and fixing
+Plug 'preservim/nerdtree'                        " File explorer
+
+" Existing plugins
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
+
+" Plugin for auto-pairing quotes, brackets, etc.
+Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
+
+
+call plug#end()
+
+" Basic settings
+set number
+set relativenumber
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Enable Coc.nvim for autocompletion and linting
+autocmd BufNewFile,BufRead *.java,*.py,*.c,*.h setlocal ts=4 sts=4 sw=4
+
+" ALE configuration for linting and fixing
+let g:ale_linters = {
+\   'java': ['javac'],
+\   'python': ['pylint', 'flake8'],
+\   'c': ['gcc']
+\}
+let g:ale_fixers = {
+\   'python': ['autopep8', 'yapf'],
+\   'c': ['clang-format']
+\}
+let g:ale_fix_on_save = 1
+
+" Coc.nvim configuration for language server and autocompletion
+let g:coc_global_extensions = ['coc-java', 'coc-pyright', 'coc-clangd']
+
+" Enable NERDTree
+map <C-n> :NERDTreeToggle<CR>
